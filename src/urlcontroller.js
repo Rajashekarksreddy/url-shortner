@@ -46,4 +46,20 @@ const createUrl = async function(req, res) {
 
 }
 
+
+const geturl = async function(req,res){
+  let urlCode = req.params.urlCode
+
+
+  let findurl = await urlModel.findOne({urlCode:urlCode})
+
+  if(findurl){
+    return res.status(302).redirect(findurl.longUrl)
+  } else {
+    res.status(400).send('no ahort url found')
+  }
+
+}
+
+module.exports.geturl = geturl
 module.exports.createUrl = createUrl
